@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link rel="stylesheet" href="css.css">
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script scr="ai.js"></script>
+
+
+  <meta charset="UTF-8">
+  <title>Hablalo</title>
+</head>
+<body>
+
+<div class="container">
+  <h2>Saca una foto</h2>
+  <div class="main-content">
+    <form id="ajax-request" method="post" action="upload.php" enctype="multipart/form-data">
+        <div class="field">
+            <label for="name">image URL</label>
+            <input type="file" accept="image/*" capture="camera" id="url" name="file" required onchange="uploadFile()">
+            <!-- <input type="text" id="url" name="file" required> -->
+        </div>
+
+        <!-- <div class="field">
+            <button type="submit">Send</button>
+        </div> -->
+
+        <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+        <h3 id="status"></h3>
+        <p id="loaded_n_total"></p>
+    </form>
+
+    <div id="form-messages"></div>
+  </div>
+</div>
+
+
+</body>
+
+<script>
+
+// Get the messages div.
+   var formMessages = $('#form-messages');
+
+  $(document).ready(function (e){
+    $("#ajax-request").on('submit',(function(e){
+      e.preventDefault();
+      $.ajax({
+        url: "upload.php",
+        type: "POST",
+        data:  new FormData(this),
+        contentType: false,
+        cache: false,
+        processData:false,
+        success: function(data){
+          //$("#form-messages").html(data);
+        },
+        error: function(){}
+      })
+      .done(function(data) {
+        console.log(data);
+        goAzure(data);
+      });
+    }));
+  });
+
+  function _(el) {
+    return document.getElementById(el);
+  }
+
+  function uploadFile() {
+    var file = _("url").files[0];
+    // alert(file.name+" | "+file.size+" | "+file.type);
+    var formdata = new FormData();
+    formdata.append("file", file);
+    var ajax = new XMLHttpRequest();
+    ajax.upload.addEventListener("progress", progressHandler, false);
+    ajax.addEventListener("load", completeHandler, false);
+    ajax.addEventListener("error", errorHandler, false);
+    ajax.addEventListener("abort", abortHandler, false);
+    ajax.addEventListener("loadend", goAzure, false);
+    ajax.open("POST", "upload.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
+    //use file_upload_parser.php from above url
+    ajax.send(formdata);
+  }
+
+  function goAzure(event){
+    var urlText = event.target.responseText;
+    var serialized = 'data=' + encodeURIComponent(urlText);
+    console.log(serialized);
+    $.ajax({
+        type: 'POST',
+        url: "ia.php",
+        data: serialized
+    })
+    .done(function(response) {
+        // Make sure that the formMessages div has the 'success' class.
+        // $(formMessages).removeClass('error');
+        // $(formMessages).addClass('success');
+
+        // Set the message text.
+        var toTalk = jQuery.parseJSON(response).description.captions[0].text;
+        responsiveVoice.speak(toTalk, "Spanish Female");
+
+        $(formMessages).text(toTalk);
+        // Clear the form.
+        // $('#name').val('');
+        // $('#email').val('');
+        // $('#message').val('');
+    })
+  };
+
+  function progressHandler(event) {
+    _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
+    var percent = (event.loaded / event.total) * 100;
+    _("progressBar").value = Math.round(percent);
+    _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+  }
+
+  function completeHandler(event) {
+    _("status").innerHTML = event.target.responseText;
+    _("progressBar").value = 0; //wil clear progress bar after successful upload
+  }
+
+  function errorHandler(event) {
+    _("status").innerHTML = "Upload Failed";
+  }
+
+  function abortHandler(event) {
+    _("status").innerHTML = "Upload Aborted";
+  }
+
+  jQuery("#progressBar2").radialProgress("init", {
+  'size': 100,
+  'fill': 5
+}).radialProgress("to", {'perc': 100, 'time': 10000});
+
+
+
+</script>
+
+
+
+</html>
