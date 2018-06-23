@@ -14,25 +14,21 @@
 <body>
 
 <div class="container">
-  <h2>Saca una foto</h2>
   <div class="main-content">
     <form id="ajax-request" method="post" action="upload.php" enctype="multipart/form-data">
         <div class="field">
-            <label for="name">image URL</label>
+            <label for="url" class="file-upload">
+              H&atilde;blalo!
+            </label>
             <input type="file" accept="image/*" capture="camera" id="url" name="file" required onchange="uploadFile()">
-            <!-- <input type="text" id="url" name="file" required> -->
         </div>
 
-        <!-- <div class="field">
-            <button type="submit">Send</button>
-        </div> -->
-
         <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
-        <h3 id="status"></h3>
-        <p id="loaded_n_total"></p>
+        <!-- <h3 id="status"></h3>
+        <p id="loaded_n_total"></p> -->
     </form>
 
-    <div id="form-messages"></div>
+    <!-- <div id="form-messages"></div> -->
   </div>
 </div>
 
@@ -104,11 +100,8 @@
         var toTalk = jQuery.parseJSON(response).description.captions[0].text;
         responsiveVoice.speak(toTalk, "Spanish Female");
 
-        $(formMessages).text(toTalk);
-        // Clear the form.
-        // $('#name').val('');
-        // $('#email').val('');
-        // $('#message').val('');
+        // $(formMessages).text(toTalk);
+
     })
   };
 
@@ -120,8 +113,8 @@
   }
 
   function completeHandler(event) {
-    _("status").innerHTML = event.target.responseText;
-    _("progressBar").value = 0; //wil clear progress bar after successful upload
+    // _("status").innerHTML = event.target.responseText;
+     _("progressBar").value = 0; //wil clear progress bar after successful upload
   }
 
   function errorHandler(event) {
@@ -131,13 +124,6 @@
   function abortHandler(event) {
     _("status").innerHTML = "Upload Aborted";
   }
-
-  jQuery("#progressBar2").radialProgress("init", {
-  'size': 100,
-  'fill': 5
-}).radialProgress("to", {'perc': 100, 'time': 10000});
-
-
 
 </script>
 
