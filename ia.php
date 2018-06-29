@@ -15,7 +15,7 @@
         // }
 
         // Replace <Subscription Key> with a valid subscription key.
-        $ocpApimSubscriptionKey = 'xxxxxxxx';
+        $ocpApimSubscriptionKey = 'XxxxX';
 
         // You must use the same location in your REST call as you used to obtain
         // your subscription keys. For example, if you obtained your subscription keys

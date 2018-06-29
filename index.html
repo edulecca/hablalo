@@ -12,7 +12,31 @@
   <title>Hablalo</title>
 </head>
 <body>
+  <div class="animation">
+    <div class="cssload-container" style="display: none;">
+      <div class="cssload-shaft1"></div>
+      <div class="cssload-shaft2"></div>
+      <div class="cssload-shaft3"></div>
+      <div class="cssload-shaft4"></div>
+      <div class="cssload-shaft5"></div>
+      <div class="cssload-shaft6"></div>
+      <div class="cssload-shaft7"></div>
+      <div class="cssload-shaft8"></div>
+      <div class="cssload-shaft9"></div>
+      <div class="cssload-shaft10"></div>
+    </div>
 
+    <div id="cssload-loader" style="display: none;">
+    	<div class="cssload-dot"></div>
+    	<div class="cssload-dot"></div>
+    	<div class="cssload-dot"></div>
+    	<div class="cssload-dot"></div>
+    	<div class="cssload-dot"></div>
+    	<div class="cssload-dot"></div>
+    	<div class="cssload-dot"></div>
+    	<div class="cssload-dot"></div>
+    </div>
+  </div>
 <div class="container">
   <div class="main-content">
     <form id="ajax-request" method="post" action="upload.php" enctype="multipart/form-data">
@@ -24,11 +48,11 @@
         </div>
 
         <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
-        <!-- <h3 id="status"></h3>
-        <p id="loaded_n_total"></p> -->
+        <h3 id="status"></h3>
+        <p id="loaded_n_total"></p>
     </form>
 
-    <!-- <div id="form-messages"></div> -->
+    <div id="form-messages"></div>
   </div>
 </div>
 
@@ -39,6 +63,9 @@
 
 // Get the messages div.
    var formMessages = $('#form-messages');
+   var loaderAnm = $('.cssload-container');
+   var speaker = $('#cssload-loader');
+
 
   $(document).ready(function (e){
     $("#ajax-request").on('submit',(function(e){
@@ -51,12 +78,11 @@
         cache: false,
         processData:false,
         success: function(data){
-          //$("#form-messages").html(data);
+          $("#form-messages").html(data);
         },
         error: function(){}
       })
       .done(function(data) {
-        console.log(data);
         goAzure(data);
       });
     }));
@@ -77,8 +103,7 @@
     ajax.addEventListener("error", errorHandler, false);
     ajax.addEventListener("abort", abortHandler, false);
     ajax.addEventListener("loadend", goAzure, false);
-    ajax.open("POST", "upload.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
-    //use file_upload_parser.php from above url
+    ajax.open("POST", "upload.php");
     ajax.send(formdata);
   }
 
@@ -92,29 +117,51 @@
         data: serialized
     })
     .done(function(response) {
-        // Make sure that the formMessages div has the 'success' class.
-        // $(formMessages).removeClass('error');
-        // $(formMessages).addClass('success');
+        loaderAnm.fadeOut();
+        speaker.fadeIn();
+
 
         // Set the message text.
-        var toTalk = jQuery.parseJSON(response).description.captions[0].text;
-        responsiveVoice.speak(toTalk, "Spanish Female");
 
-        // $(formMessages).text(toTalk);
+        if(response) {
+            var json = jQuery.parseJSON(response);
+            if (json.code == "InvalidImageUrl" || (json.description.captions).length === 0) {
+              responsiveVoice.speak('No reconoci la imagen. Por favor volve a intertarlo', "Spanish Female");
+
+            } else {
+              var toTalk = json.description.captions[0].text;
+              responsiveVoice.speak(toTalk, "Spanish Female");
+            }
+
+        } else {
+          responsiveVoice.speak('No reconoci la imagen. Por favor volve a intertarlo', "Spanish Female");
+        }
+
+        formMessages.text(toTalk);
+
+        setTimeout(function(){
+          formMessages.text('');
+          speaker.fadeOut();
+          formMessages.fadeIn();
+          $("#progressBar").fadeIn();
+          $("#status").fadeIn();
+        }, 5000);
 
     })
   };
 
   function progressHandler(event) {
-    _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
+    //_("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
     var percent = (event.loaded / event.total) * 100;
     _("progressBar").value = Math.round(percent);
-    _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+     _("status").innerHTML = Math.round(percent) + "%";
   }
 
   function completeHandler(event) {
-    // _("status").innerHTML = event.target.responseText;
+     //_("status").innerHTML = event.target.responseText;
      _("progressBar").value = 0; //wil clear progress bar after successful upload
+     _("status").innerHTML = "";
+     loaderAnm.fadeIn();
   }
 
   function errorHandler(event) {

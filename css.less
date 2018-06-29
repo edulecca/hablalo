@@ -2,12 +2,462 @@
 html {
     height: 100%;
 }
+
+
+//PROGRES BAR
+
+progress,          /* All HTML5 progress enabled browsers */
+progress[role]     /* polyfill */
+{
+
+	/* Turns off styling - not usually needed, but good to know. */
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	/* gets rid of default border in Firefox and Opera. */
+	border: none;
+
+	/* Needs to be in here for Safari polyfill so background images work as expected. */
+	background-size: auto;
+
+	/* Dimensions */
+	width: 400px;
+	height: 60px;
+
+}
+
+/* Polyfill */
+progress[role]:after {
+	background-image: none; /* removes default background from polyfill */
+}
+
+/* Ensure fallback text doesn't appear in polyfill */
+progress[role] strong {
+	display: none;
+}
+
+progress,                          /* Firefox  */
+progress[role][aria-valuenow] {    /* Polyfill */
+   background: transparent !important; /* !important is needed by the polyfill */
+}
+
+/* Chrome */
+progress::-webkit-progress-bar {
+    background: transparent;
+}
+
+
+/* IE10 */
+progress {
+    color: black;
+}
+
+/* Firefox */
+progress::-moz-progress-bar {
+    background: black;
+}
+
+/* Chrome */
+progress::-webkit-progress-value {
+    background: black;
+}
+
+/* Polyfill */
+progress[aria-valuenow]:before  {
+    background: black;
+}
+
+// END PROGRESS Bar
+
+// LOADER
+
+.cssload-container *, .cssload-container *:before, .cssload-container *:after{
+	box-sizing: border-box;
+		-o-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+}
+
+.cssload-container {
+	margin: 294px auto;
+	position: relative;
+	width: 588px;
+	height: 588px;
+}
+.cssload-container > div {
+	float: left;
+	background: rgba(185,108,255,0.75);
+	height: 100%;
+	width: 29px;
+	margin-right: 6px;
+	display: inline-block;
+}
+
+.cssload-container {
+	position: relative;
+	width: 588px;
+	height: 588px;
+}
+.cssload-container > div {
+	background: transparent;
+	border: 47px solid transparent;
+	border-color: rgb(185,108,255) transparent;
+	border-radius: 100%;
+		-o-border-radius: 100%;
+		-ms-border-radius: 100%;
+		-webkit-border-radius: 100%;
+		-moz-border-radius: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate"("-50%, -50%")";
+		-o-transform: translate"("-50%, -50%")";
+		-ms-transform: translate"("-50%, -50%")";
+		-webkit-transform: translate"("-50%, -50%")";
+		-moz-transform: translate"("-50%, -50%")";
+	transform: translate(-50%, -50%) rotate(0);
+		-o-transform: translate(-50%, -50%) rotate(0);
+		-ms-transform: translate(-50%, -50%) rotate(0);
+		-webkit-transform: translate(-50%, -50%) rotate(0);
+		-moz-transform: translate(-50%, -50%) rotate(0);
+	animation: cssload-wave 2.3s infinite ease-in-out;
+		-o-animation: cssload-wave 2.3s infinite ease-in-out;
+		-ms-animation: cssload-wave 2.3s infinite ease-in-out;
+		-webkit-animation: cssload-wave 2.3s infinite ease-in-out;
+		-moz-animation: cssload-wave 2.3s infinite ease-in-out;
+}
+.cssload-container .cssload-shaft1 {
+	animation-delay: 0.12s;
+		-o-animation-delay: 0.12s;
+		-ms-animation-delay: 0.12s;
+		-webkit-animation-delay: 0.12s;
+		-moz-animation-delay: 0.12s;
+	width: 118px;
+	height: 118px;
+}
+.cssload-container .cssload-shaft2 {
+	animation-delay: 0.23s;
+		-o-animation-delay: 0.23s;
+		-ms-animation-delay: 0.23s;
+		-webkit-animation-delay: 0.23s;
+		-moz-animation-delay: 0.23s;
+	width: 147px;
+	height: 147px;
+}
+.cssload-container .cssload-shaft3 {
+	animation-delay: 0.35s;
+		-o-animation-delay: 0.35s;
+		-ms-animation-delay: 0.35s;
+		-webkit-animation-delay: 0.35s;
+		-moz-animation-delay: 0.35s;
+	width: 206px;
+	height: 206px;
+}
+.cssload-container .cssload-shaft4 {
+	animation-delay: 0.46s;
+		-o-animation-delay: 0.46s;
+		-ms-animation-delay: 0.46s;
+		-webkit-animation-delay: 0.46s;
+		-moz-animation-delay: 0.46s;
+	width: 264px;
+	height: 264px;
+}
+.cssload-container .cssload-shaft5 {
+	animation-delay: 0.58s;
+		-o-animation-delay: 0.58s;
+		-ms-animation-delay: 0.58s;
+		-webkit-animation-delay: 0.58s;
+		-moz-animation-delay: 0.58s;
+	width: 323px;
+	height: 323px;
+}
+.cssload-container .cssload-shaft6 {
+	animation-delay: 0.69s;
+		-o-animation-delay: 0.69s;
+		-ms-animation-delay: 0.69s;
+		-webkit-animation-delay: 0.69s;
+		-moz-animation-delay: 0.69s;
+	width: 382px;
+	height: 382px;
+}
+.cssload-container .cssload-shaft7 {
+	animation-delay: 0.81s;
+		-o-animation-delay: 0.81s;
+		-ms-animation-delay: 0.81s;
+		-webkit-animation-delay: 0.81s;
+		-moz-animation-delay: 0.81s;
+	width: 441px;
+	height: 441px;
+}
+.cssload-container .cssload-shaft8 {
+	animation-delay: 0.92s;
+		-o-animation-delay: 0.92s;
+		-ms-animation-delay: 0.92s;
+		-webkit-animation-delay: 0.92s;
+		-moz-animation-delay: 0.92s;
+	width: 470px;
+	height: 470px;
+}
+.cssload-container .cssload-shaft9 {
+	animation-delay: 1.04s;
+		-o-animation-delay: 1.04s;
+		-ms-animation-delay: 1.04s;
+		-webkit-animation-delay: 1.04s;
+		-moz-animation-delay: 1.04s;
+	width: 499px;
+	height: 499px;
+}
+.cssload-container .cssload-shaft10 {
+	animation-delay: 1.15s;
+		-o-animation-delay: 1.15s;
+		-ms-animation-delay: 1.15s;
+		-webkit-animation-delay: 1.15s;
+		-moz-animation-delay: 1.15s;
+	width: 529px;
+	height: 529px;
+}
+
+
+
+@keyframes cssload-wave {
+	50% {
+		transform: translate(-50%, -50%) rotate(360deg);
+		border-color: rgba(86,215,198,0.98) transparent;
+	}
+}
+
+@-o-keyframes cssload-wave {
+	50% {
+		-o-transform: translate(-50%, -50%) rotate(360deg);
+		border-color: rgba(86,215,198,0.98) transparent;
+	}
+}
+
+@-ms-keyframes cssload-wave {
+	50% {
+		-ms-transform: translate(-50%, -50%) rotate(360deg);
+		border-color: rgba(86,215,198,0.98) transparent;
+	}
+}
+
+@-webkit-keyframes cssload-wave {
+	50% {
+		-webkit-transform: translate(-50%, -50%) rotate(360deg);
+		border-color: rgba(86,215,198,0.98) transparent;
+	}
+}
+
+@-moz-keyframes cssload-wave {
+	50% {
+		-moz-transform: translate(-50%, -50%) rotate(360deg);
+		border-color: rgba(86,215,198,0.98) transparent;
+	}
+}
+
+// END LOADER
+
+
+// SPEAK ANIMATION
+#cssload-loader {
+  position: absolute;
+	top: 1200px;
+	left: -220px;
+	right: 0;
+	bottom: 0;
+	width: 1028px;
+	height: 1028px;
+	margin: auto;
+  overflow: hidden;
+}
+#cssload-loader .cssload-dot {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 514.5px;
+	height: 100%;
+	margin: auto;
+}
+#cssload-loader .cssload-dot:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 514.5px;
+	height: 514.5px;
+	border-radius: 100%;
+	transform: scale(0);
+		-o-transform: scale(0);
+		-ms-transform: scale(0);
+		-webkit-transform: scale(0);
+		-moz-transform: scale(0);
+}
+#cssload-loader .cssload-dot:nth-child(7n+1) {
+	transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+1):before {
+	background: rgb(0,255,128);
+	animation: cssload-load 1.52s linear 0.19s infinite;
+		-o-animation: cssload-load 1.52s linear 0.19s infinite;
+		-ms-animation: cssload-load 1.52s linear 0.19s infinite;
+		-webkit-animation: cssload-load 1.52s linear 0.19s infinite;
+		-moz-animation: cssload-load 1.52s linear 0.19s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+2) {
+	transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+2):before {
+	background: rgb(0,255,234);
+	animation: cssload-load 1.52s linear 0.38s infinite;
+		-o-animation: cssload-load 1.52s linear 0.38s infinite;
+		-ms-animation: cssload-load 1.52s linear 0.38s infinite;
+		-webkit-animation: cssload-load 1.52s linear 0.38s infinite;
+		-moz-animation: cssload-load 1.52s linear 0.38s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+3) {
+	transform: rotate(135deg);
+		-o-transform: rotate(135deg);
+		-ms-transform: rotate(135deg);
+		-webkit-transform: rotate(135deg);
+		-moz-transform: rotate(135deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+3):before {
+	background: rgb(0,170,255);
+	animation: cssload-load 1.52s linear 0.57s infinite;
+		-o-animation: cssload-load 1.52s linear 0.57s infinite;
+		-ms-animation: cssload-load 1.52s linear 0.57s infinite;
+		-webkit-animation: cssload-load 1.52s linear 0.57s infinite;
+		-moz-animation: cssload-load 1.52s linear 0.57s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+4) {
+	transform: rotate(180deg);
+		-o-transform: rotate(180deg);
+		-ms-transform: rotate(180deg);
+		-webkit-transform: rotate(180deg);
+		-moz-transform: rotate(180deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+4):before {
+	background: rgb(0,64,255);
+	animation: cssload-load 1.52s linear 0.76s infinite;
+		-o-animation: cssload-load 1.52s linear 0.76s infinite;
+		-ms-animation: cssload-load 1.52s linear 0.76s infinite;
+		-webkit-animation: cssload-load 1.52s linear 0.76s infinite;
+		-moz-animation: cssload-load 1.52s linear 0.76s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+5) {
+	transform: rotate(225deg);
+		-o-transform: rotate(225deg);
+		-ms-transform: rotate(225deg);
+		-webkit-transform: rotate(225deg);
+		-moz-transform: rotate(225deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+5):before {
+	background: rgb(42,0,255);
+	animation: cssload-load 1.52s linear 0.95s infinite;
+		-o-animation: cssload-load 1.52s linear 0.95s infinite;
+		-ms-animation: cssload-load 1.52s linear 0.95s infinite;
+		-webkit-animation: cssload-load 1.52s linear 0.95s infinite;
+		-moz-animation: cssload-load 1.52s linear 0.95s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+6) {
+	transform: rotate(270deg);
+		-o-transform: rotate(270deg);
+		-ms-transform: rotate(270deg);
+		-webkit-transform: rotate(270deg);
+		-moz-transform: rotate(270deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+6):before {
+	background: rgb(149,0,255);
+	animation: cssload-load 1.52s linear 1.14s infinite;
+		-o-animation: cssload-load 1.52s linear 1.14s infinite;
+		-ms-animation: cssload-load 1.52s linear 1.14s infinite;
+		-webkit-animation: cssload-load 1.52s linear 1.14s infinite;
+		-moz-animation: cssload-load 1.52s linear 1.14s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+7) {
+	transform: rotate(315deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+7):before {
+	background: magenta;
+	animation: cssload-load 1.52s linear 1.33s infinite;
+		-o-animation: cssload-load 1.52s linear 1.33s infinite;
+		-ms-animation: cssload-load 1.52s linear 1.33s infinite;
+		-webkit-animation: cssload-load 1.52s linear 1.33s infinite;
+		-moz-animation: cssload-load 1.52s linear 1.33s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+8) {
+	transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+8):before {
+	background: rgb(255,0,149);
+	animation: cssload-load 1.52s linear 1.52s infinite;
+		-o-animation: cssload-load 1.52s linear 1.52s infinite;
+		-ms-animation: cssload-load 1.52s linear 1.52s infinite;
+		-webkit-animation: cssload-load 1.52s linear 1.52s infinite;
+		-moz-animation: cssload-load 1.52s linear 1.52s infinite;
+}
+
+
+
+@keyframes cssload-load {
+	100% {
+		opacity: 0;
+		transform: scale(1);
+	}
+}
+
+@-o-keyframes cssload-load {
+	100% {
+		opacity: 0;
+		-o-transform: scale(1);
+	}
+}
+
+@-ms-keyframes cssload-load {
+	100% {
+		opacity: 0;
+		-ms-transform: scale(1);
+	}
+}
+
+@-webkit-keyframes cssload-load {
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(1);
+	}
+}
+
+@-moz-keyframes cssload-load {
+	100% {
+		opacity: 0;
+		-moz-transform: scale(1);
+	}
+}
+
+
 body {
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background: linear-gradient(163deg, #4b6cb7 0%, #182848 100%);
+  background: yellow;
+  //background: linear-gradient(163deg, #FAFF00 0%, #CC00C5 100%);
   background-size: cover;
 
   h2 {
@@ -16,9 +466,17 @@ body {
     margin: 0 auto;
   }
 
+  .animation {
+    z-index: 1;
+    top: 0;
+    left: 22%;
+    position: absolute;
+  }
+
   .container {
 
     .main-content {
+      z-index: 2;
       width: 800px;
       border-radius: 5px;
       padding: 10px;
@@ -38,13 +496,6 @@ body {
         box-shadow: 5px 5px 5px #eee;
         text-shadow:none;
       }
-
-    }
-    svg path {
-      fill: none;
-      stroke-width: 20px;
-      stroke-miterlimit: round;
-      transition: stroke-dashoffset 850ms ease-in-out;
     }
   }
 
@@ -52,12 +503,15 @@ body {
     display: none;
   }
   .file-upload {
-    border-bottom: 5px solid #ccc;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
     font-weight: bolder;
     font-size: 150px;
-    color: white;
+    color: black;
+  }
+
+  #form-messages {
+    font-size: 16px;
   }
 }
